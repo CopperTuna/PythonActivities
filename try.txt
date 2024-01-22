@@ -1,0 +1,110 @@
+﻿import mysql.connector
+def main():
+    connection = mysql.connector.connect(host='localhost',
+                                     user='admin',
+                                     password='Instantdeath',
+                                     database='oop_demo')
+    global cursor
+    cursor = connection.cursor()
+    choose = int(input("(1)Login\n(2)don't have an account?\n(3)forgot password?\n(4)edit profile:"))
+    match choose:
+        case 1:
+            print('=========================================================')
+            print("                          LOGIN                          ")
+            print("                         USERNAME                        ")
+            username = input("          Enter username: ")
+            print("                         PASSWORD                        ")
+            password = input("          Enter Password: ")
+            user_query = 'SELECT * FROM users WHERE username = %s and password = %s'
+            values = (username,password)
+            cursor.execute(user_query,values)
+            user = cursor.fetchone()
+            if user is not None:
+                print('=================================================')
+                query = 'SELECT * FROM `users` WHERE username = %s and password = %s'
+                values = (username,password)
+                cursor.execute(query,values)
+                records = cursor.fetchall()
+                for record in records:
+                    print("\n","id:",record[0],"\n","First Name:",record[1],"\n","Last Name:",record[2],"\n","Middle Name:",record[3],"\n","Username:",record[4],"\n","Password:",record[5],"\n","Birth Date:",record[6],"\n","Hobby:",record[7],"\n","Bio:",record[8],"\n","Parent Name:",record[9],"\n","Parent Last Name:",record[10])
+                connection.commit()
+                connection.close()
+            else:
+                print('Invalid Username or Password')
+        case 2:
+            #COLLECT DATA FROM USER
+            print("================================================")
+            print("                     SIGN UP                    ")
+            id = int(input("      enter id: "))
+            first_name = input("  first name: ")
+            last_name = input("   last name: ")
+            middle_name = input(" middle name: ")
+            username = input("    username: ")
+            password = input("    password: ")
+            birth_date = input("  birt date: ")
+            hobby = input("       hobby: ")
+            bio = input("         bio: ")
+            parent_name = input(" parent first name: ")
+            parent_lname = input("parent last name: ")
+            #This query is to insert the data from the user into the database
+            query = """INSERT INTO `users`(`id`, `first_name`, `last_name`, middle_name, username, password, 
+            `birth_date`, `hobby`, `bio`, `parent_name`, `parent_lastname`) 
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            cursor.execute(query,(id,first_name,last_name,middle_name,username,password,birth_date,hobby,bio,parent_name,parent_lname))
+            connection.commit()
+            connection.close()
+            #DITO MO EXECUTE YUNG QUERY WAG SA PINAKABABA DAPAT NASA LOOB NG CONDITIONAL STATEMENT
+
+
+        case 3:
+            your_id = int(input("    enter id: "))
+            select_query = f'SELECT * FROM users WHERE id = {your_id}'
+            cursor.execute(select_query)
+            id = cursor.fetchone()
+            if id is not None:
+                forgot_password = input("enter new-password: ")
+                confirm_password = input("confirm password: ")
+                if forgot_password != confirm_password:
+                    print('Password does not match')
+                else:
+                    query = f"""UPDATE users SET password = %s WHERE id = %s"""
+                    values = (forgot_password, your_id)
+                    cursor.execute(query,values)
+                    records = cursor.fetchall()
+                    for record in records:
+                        print(record)
+                    connection.commit()
+                    connection.close()
+            else:
+                print('Invalid ID')
+        case 4:
+            print("==============================================")
+            print("                   Edit Profile               ")
+            your_id = int(input('Enter ID: '))
+            select_query = f"SELECT * FROM users WHERE id = {your_id}"
+            cursor.execute(select_query)
+            id = cursor.fetchone()
+            if id is not None:
+                first_name = input('enter first name: ')
+                last_name = input('enter last name: ')
+                middle_name = input('enter middle name: ')
+                username = input('enter username: ')
+                password = input('enter password: ')
+                birth_date = input('enter birth date: ')
+                hobby = input('enter hobby: ')
+                bio = input('enter bio: ')
+                parent_name = input('enter parent name: ')
+                parent_lastname = input('enter parent lastname: ')
+                query = f"""UPDATE users SET first_name = %s, last_name = %s, middle_name = %s, username = %s, 
+                password = %s, birth_date = %s, hobby = %s, bio = %s, parent_name = %s, parent_lastname = %s
+                WHERE id = {your_id}"""
+                values = (first_name, last_name, middle_name, username, password, birth_date, hobby, bio, parent_name, parent_lastname)
+                cursor.execute(query, values)
+                connection.commit()
+                connection.close()
+        case _:
+            print('A what?')
+try:
+    main()
+except ValueError:
+    pass
