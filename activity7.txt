@@ -1,0 +1,70 @@
+﻿main.py
+import Shopping_Cart
+obj = Shopping_Cart
+try:
+    obj.MyFunction()
+except:
+    print("Invalid Keyword")
+else:
+    pass
+
+
+Shopping_Cart.py
+def MyFunction():
+    class Shopping_Cart:
+        def __init__(self):
+            pass
+    class User(Shopping_Cart):
+        def __init__(self,username,password):
+            self.username = username
+            self.password = password
+    class Calculate(Shopping_Cart):
+        def __init__(self,price):
+            self.price = price
+    items = {}
+    item = {
+        "clothes": 150,
+        "shoes"  : 5000,
+        "bag"    : 2500,
+        "makeup" : 500,
+        "table"  : 1000,
+        "socks"  : 250,
+        "binder" : 250,
+        "ballpen": 25,
+        "polo"   : 250,
+        "pants"  : 200,
+    }
+    obj2 = User("user123",123)
+    while True:
+        user = str(input("Enter username: "))
+        user1 = int(input("Enter password: "))
+        if user == obj2.username and user1 == obj2.password:
+            print("Welcome",obj2.username)
+            user2 = input("(1)remove item (2)adding?: ")
+            if user2 == '1':
+                print(items)
+                user = str(input("what item do you want to remove?: "))
+                if user in items:
+                    items.pop(user)
+                    print(items)
+            elif user2 == '2':
+                user1 = int(input("How many item do you want to purchase?: "))
+                print(item)
+                for x in range(user1):
+                    user = str(input("What item do you want to purchase?: "))
+                    if user in item:
+                        user1 = item.get(user)
+                        print("You've purchased:",user,user1)
+                        items.update({user:user1})
+                        print(items)
+                    else:
+                        print("Invalid Syntax")
+                        break
+        else:
+            print("Invalid username or password")
+        user2 = str(input("Do you want to repeat the transaction(y or n)?: "))
+        if user2 != "y":
+            print("Thank You for using the system")
+            bill = items.values()
+            print("your bill:",sum(bill))
+            break
