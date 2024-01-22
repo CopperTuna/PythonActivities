@@ -1,0 +1,20 @@
+﻿def my_function():
+    while True:
+        user = str(input("Enter a sentence or paragraph: "))
+        print(user)
+        inputALetter = str(input("Enter a letter: "))
+        x = user.replace(inputALetter,inputALetter.upper())
+        print(x)
+        choice = str(input("Do you want to enter again?: "))
+        if choice == "n":
+            print("System Closing")
+            break
+
+
+import Activity4
+try:
+    Activity4.my_function()
+except:
+    print("Error Has Occured")
+else:
+    pass
