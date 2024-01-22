@@ -1,0 +1,274 @@
+﻿-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Nov 15, 2023 at 12:34 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
+
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+
+--
+-- Database: `student_database`
+--
+
+
+-- --------------------------------------------------------
+
+
+--
+-- Table structure for table `instructors`
+--
+
+
+CREATE TABLE `instructors` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(10) NOT NULL,
+  `last_name` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Dumping data for table `instructors`
+--
+
+
+INSERT INTO `instructors` (`id`, `first_name`, `last_name`) VALUES
+(1110, 'jerome', 'lagman'),
+(2220, 'jerold', 'nain'),
+(3330, 'jason', 'ticse');
+
+
+-- --------------------------------------------------------
+
+
+--
+-- Table structure for table `login`
+--
+
+
+CREATE TABLE `login` (
+  `login_time` datetime NOT NULL,
+  `id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Dumping data for table `login`
+--
+
+
+INSERT INTO `login` (`login_time`, `id`) VALUES
+('2023-11-15 10:41:32', 1);
+
+
+-- --------------------------------------------------------
+
+
+--
+-- Table structure for table `logout`
+--
+
+
+CREATE TABLE `logout` (
+  `id` int(10) NOT NULL,
+  `logout_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Dumping data for table `logout`
+--
+
+
+INSERT INTO `logout` (`id`, `logout_time`) VALUES
+(1, '2023-11-15 11:15:25');
+
+
+-- --------------------------------------------------------
+
+
+--
+-- Table structure for table `student_list`
+--
+
+
+CREATE TABLE `student_list` (
+  `id` int(10) NOT NULL,
+  `first_name` varchar(10) NOT NULL,
+  `last_name` varchar(10) NOT NULL,
+  `middle_initial` varchar(5) NOT NULL,
+  `gender` varchar(2) NOT NULL,
+  `advisory_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Dumping data for table `student_list`
+--
+
+
+INSERT INTO `student_list` (`id`, `first_name`, `last_name`, `middle_initial`, `gender`, `advisory_id`) VALUES
+(1, 'froilan', 'baguio', '', 'm', 1110),
+(2, 'rafael', 'nain', 's', 'm', 1110),
+(3, 'james', 'yabut', '', 'm', 1110),
+(4, 'shanon', 'ticse', 'g', 'f', 2220),
+(5, 'lynchee', 'circulo', '', 'f', 2220),
+(6, 'patricia', 'muldong', 'm', 'f', 1110),
+(7, 'anthony', 'planos', '', 'm', 3330),
+(8, 'ian', 'ilao', 'm', 'm', 3330),
+(9, 'rainer', 'sanchez', 'm', 'm', 3330),
+(10, 'jimuel', 'lagman', '', 'm', 2220);
+
+
+-- --------------------------------------------------------
+
+
+--
+-- Table structure for table `subject_name`
+--
+
+
+CREATE TABLE `subject_name` (
+  `instructor_id` int(10) NOT NULL,
+  `subject` varchar(15) NOT NULL,
+  `student_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Dumping data for table `subject_name`
+--
+
+
+INSERT INTO `subject_name` (`instructor_id`, `subject`, `student_id`) VALUES
+(1110, '7oop', 1),
+(1110, '7oop', 2),
+(1110, '7oop', 3),
+(2220, '7net1', 4),
+(2220, '7net1', 5),
+(1110, '7oop', 6),
+(3330, '7web1', 7),
+(3330, '7web1', 8),
+(3330, '7web1', 9),
+(2220, '7net1', 10);
+
+
+--
+-- Indexes for dumped tables
+--
+
+
+--
+-- Indexes for table `instructors`
+--
+ALTER TABLE `instructors`
+  ADD PRIMARY KEY (`id`);
+
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD KEY `id` (`id`);
+
+
+--
+-- Indexes for table `logout`
+--
+ALTER TABLE `logout`
+  ADD PRIMARY KEY (`id`);
+
+
+--
+-- Indexes for table `student_list`
+--
+ALTER TABLE `student_list`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `advisory_id` (`advisory_id`);
+
+
+--
+-- Indexes for table `subject_name`
+--
+ALTER TABLE `subject_name`
+  ADD PRIMARY KEY (`student_id`),
+  ADD KEY `instructor_id` (`instructor_id`);
+
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+
+--
+-- AUTO_INCREMENT for table `instructors`
+--
+ALTER TABLE `instructors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3331;
+
+
+--
+-- AUTO_INCREMENT for table `student_list`
+--
+ALTER TABLE `student_list`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+
+--
+-- AUTO_INCREMENT for table `subject_name`
+--
+ALTER TABLE `subject_name`
+  MODIFY `student_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+
+--
+-- Constraints for dumped tables
+--
+
+
+--
+-- Constraints for table `login`
+--
+ALTER TABLE `login`
+  ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`id`) REFERENCES `student_list` (`id`);
+
+
+--
+-- Constraints for table `logout`
+--
+ALTER TABLE `logout`
+  ADD CONSTRAINT `logout_ibfk_1` FOREIGN KEY (`id`) REFERENCES `student_list` (`id`);
+
+
+--
+-- Constraints for table `student_list`
+--
+ALTER TABLE `student_list`
+  ADD CONSTRAINT `student_list_ibfk_1` FOREIGN KEY (`advisory_id`) REFERENCES `instructors` (`id`);
+
+
+--
+-- Constraints for table `subject_name`
+--
+ALTER TABLE `subject_name`
+  ADD CONSTRAINT `subject_name_ibfk_1` FOREIGN KEY (`instructor_id`) REFERENCES `instructors` (`id`);
+COMMIT;
+
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
