@@ -1,0 +1,57 @@
+﻿Bank.py
+def MyFunction():
+    class Bank:
+        def __init__(self,accnum,ID,pin):
+            self.accnum = accnum
+            self.ID = ID
+            self.pin = pin
+    class Balance(Bank):
+        def __init__(self,balance):
+            self.balance = balance
+    class WithDraw(Bank):
+        def __init__(self,withdraw):
+            self.withdraw = withdraw
+    class Deposit(Bank):
+        def __init__(self,deposit):
+            self.deposit = deposit
+    obj1 = Bank(12345,2023,1110)
+    obj2 = Balance(1000)
+    obj3 = WithDraw
+    obj4 = Deposit
+    while True:
+        user1 = int(input("Enter account number: "))
+        user2 = int(input("Enter your Pin: "))
+        user3 = int(input("Enter your ID: "))
+        if user1 == obj1.accnum and user2 == obj1.pin and user3 == obj1.ID:
+            print("Welcome",obj1.accnum)
+            print("(1)Withdraw\n(2)Deposit")
+            user = input("How can I help you today?: ")
+            if user == '1':
+                obj3.withdraw = int(input("Enter the amount of Money: "))
+                if obj2.balance >= obj3.withdraw:
+                    obj2.balance -= obj3.withdraw
+                    print("You have successfully withdraw a",obj3.withdraw,"amount of money, your current balance is",obj2.balance)
+                else:
+                    print("Insufficient ammount of money")
+            elif user == '2':
+                obj4.deposit = int(input("Enter the amount to deposit: "))
+                obj2.balance += obj4.deposit
+                print("You have successfully deposited a total of",obj4.deposit,"Your current balance is:",obj2.balance)
+            else:
+                print("Invalid Syntax")
+        else:
+            print("Account not found")
+        user5 = str(input("Do you want to repeat the transaction(y or n)?: "))
+        if user5 != 'y':
+            print("Thank You for using the system")
+            break
+
+
+main.py
+import Bank
+try:
+    Bank.MyFunction()
+except:
+    print("Error has occured")
+else:
+    pass
