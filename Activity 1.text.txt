@@ -1,0 +1,37 @@
+﻿import math
+print("Arithmetic Operators")
+print("Addition(1),Subtraction(2),Multiplication(3),Division(4),Modulus(5),Square root(6),Exponents(7)")
+choose = str(input("Choose Arithmetic Operator(number): "))
+number1 = ""
+number2 = ""
+squareRoot = ""
+if choose == "1":
+    number1 = int(input("Enter the first number: "))
+    number2 = int(input("Enter the second number: "))
+    print(number1,"+",number2,"=",(number1+number2))
+elif choose == "2":
+    number1 = float(input("Enter the first number: "))
+    number2 = float(input("Enter the second number: "))
+    print(number1,"-",number2,"=",(number1-number2))
+elif choose == "3":
+    number1 = float(input("Enter the first number: "))
+    number2 = float(input("Enter the second number: "))
+    print(number1,"x",number2,"=",(number1*number2))
+elif choose == "4":
+    number1 = float(input("Enter the first number: "))
+    number2 = float(input("Enter the second number: "))
+    print(number1,"/",number2,"=",(number1/number2))
+elif choose == "5":
+    number1 = int(input("Enter the first number: "))
+    number2 = int(input("Enter the second number: "))
+    print(number1,"%",number2,"=",(number1%number2))
+elif choose == "6":
+    squareRoot = int(input("Enter a number to square root: "))
+    x = math.sqrt(squareRoot)
+    print("Square root of",squareRoot,"is",x)
+elif choose == "7":
+    number1 = int(input("Enter the first number: "))
+    number2 = int(input("Enter the second number: "))
+    print(number1,"**",str(number2),"is",(number1**number2))
+else:
+    print("Out of Range, Thank you for using the program!")
