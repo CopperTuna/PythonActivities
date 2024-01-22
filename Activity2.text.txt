@@ -1,0 +1,22 @@
+﻿import random
+user = input("Select a mode of betting(u or r): ")
+userNumbers = []
+number = []
+randomNumbers = []
+anotherRandom = []
+if user == "u":
+  for x in range(0, 6):
+    number = input("Enter 6 numbers from 1 to 49: ")
+    userNumbers.append(number)
+  print(userNumbers)
+elif user == "r":
+  for i in range(0,6):
+      randomNumbers.append(random.randrange(1,49))
+print(randomNumbers)
+for x in range(0,6):
+  anotherRandom.append(random.randrange(1,49))
+print(anotherRandom)
+if randomNumbers == anotherRandom:
+  print("You won the lottery!")
+else:
+  print("You lose the lottery")
